@@ -10,6 +10,10 @@
     height: 100vw;
 }
 
+.card-custom{
+    margin: 10px;
+}
+
 /* footer */
     .footer-position{
         position: absolute;

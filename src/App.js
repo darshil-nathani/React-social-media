@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import CreatePost from "./components/CreatePost";
 import Posts from "./components/Posts";
+import PostsProvider from "./store/Posts-store";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     const[sidebarTab, setSidebarTab] = useState("Home");
 
   return (
+    <PostsProvider>
     <>
       <div className="app-container">
         <Sidebar sidebarTab={sidebarTab} setSidebarTab={setSidebarTab}/> 
@@ -23,6 +25,7 @@ function App() {
         </div>
       </div>
     </>
+    </PostsProvider>
   );
 }
 
