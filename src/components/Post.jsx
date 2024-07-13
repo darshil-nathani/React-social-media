@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { TiDelete } from 'react-icons/ti'
+import { PostsContext } from '../store/Posts-store'
 
 export default function Post({post}) {
+
+  const {deletePost} = useContext(PostsContext)
+
   return (
     <>
         <div className="card card-custom" style={{width: "18rem"}}>
             <div className="card-body">
                 <h5 className="card-title">{post.title}
-                  <span className='position-absolute top-0 start-100 transalate-middle badge rounded-pill bg-danger'>
-                    {post.reaction}
-                    <span className='visually-hidden'>unreaded message</span>
-                  </span>
+                  <span className='badge-custom' onClick={()=>deletePost(post.id)}>
+                    <TiDelete />
+                    </span>
                 </h5>
                 <p className="card-text">{post.body}</p>
                 {post.tags.map(tag=><span className='badge text-bg-primary'>{tag}</span>)}

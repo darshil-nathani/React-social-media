@@ -8,16 +8,36 @@ export const PostsContext = createContext({
   });
 
 export default function PostsProvider({ children }) {
-  const addPost = () => {
-
+  const addPost = (userId, postTitle, postContent, postReaction, postTAgs) => {
+    dispatchPosts({
+      type:'ADD_POST',
+      payload:{
+          id:Date.now(),
+          title:postTitle,
+          body:postContent,
+          reaction:postReaction,
+          userId:userId,
+          tags:postTAgs,
+      },
+    })
   };
 
-  const deletePost = () => {
-
+  const deletePost = (postId) => {
+    dispatchPosts({
+      type:'DELETE_POST',
+      payload:{
+        postId,
+      },
+    })
   };
 
   const postReducer = (currPosts, action) => {
-
+    if(action.type === 'DELETE_POST'){
+    currPosts = currPosts.filter(post => post.id === action.payload.postId)
+    }else if(action.type === 'ADD_POST')
+    {
+      currPosts = [action.payload, ...currPosts];
+    }
     return currPosts;
   };
 
@@ -34,7 +54,7 @@ export default function PostsProvider({ children }) {
       {children}
     </PostsContext.Provider>
   );
-}
+};
 
 
 
@@ -47,7 +67,7 @@ const Default_post_list = [{
     tags:["project","react"]
 },
 {
-    id:'1',
+    id:'',
     title:"darshil",
     body:"darshil project",
     reaction:"500",
